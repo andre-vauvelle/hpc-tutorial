@@ -24,4 +24,6 @@
 
 ![Network Diagram](images/network_diagram.png)
 
-[![asciicast](https://asciinema.org/a/13BwYPeEBO9QLm6NF0oylfbSN.svg)](https://asciinema.org/a/13BwYPeEBO9QLm6NF0oylfbSN)
+<p align="center">
+  <img width="600" src="asciinema/logging_in.svg">
+</p>
