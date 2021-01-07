@@ -4,6 +4,8 @@
 
 ![Network Diagram](images/network_diagram.png)
 
+## Logging In
+
 <p align="center">
   <img width="600" src="asciinema/logging_in.svg">
 </p>
