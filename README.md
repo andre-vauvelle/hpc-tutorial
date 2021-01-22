@@ -35,7 +35,7 @@ The IHI is also in the process so procuring its own HPC services but we're not t
 
 ## How does it work?
 
-![Network Diagram](images/network_diagram.png)
+![Network Diagram](images/network_diagram_basic.png)
 
 ## Logging In
 
