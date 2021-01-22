@@ -26,18 +26,43 @@ First of all, it's worth checking if your supervisor already has accesss to HPC 
 
 If not you can request an account:
 * CS HPC at https://hpc.cs.ucl.ac.uk/account-form/ 
-* UCL Research Center at https://signup.rc.ucl.ac.uk/computing/requests/new
+* UCL Research Center (RC) at https://signup.rc.ucl.ac.uk/computing/requests/new
 
-This guide is going to use the CS HPC cluster but both should be similar.
+This guide is going to use the CS HPC cluster but the two are very similar. Worth noting that I have borrowed loads from the *much better* docs of RC https://www.rc.ucl.ac.uk/docs/.
 
-The IHI is also in the process so procuring its own HPC services but we're not there yet :(.
-
+The IHI is in the process so procuring its own HPC services but we're not there yet :(.
 
 ## How does it work?
-
 ![Network Diagram](images/network_diagram_basic.png)
 
-## Logging In
+
+## How do I use it?
+
+Most people use something like the following workflow:
+
+ - connect to the cluster's "login nodes"
+ - create a script of commands to run programs
+ - submit the script to the scheduler
+ - wait for the scheduler to find available "compute nodes" and run the script
+ - look at the results in the files the script created
+
+
+### Logging In
+
+#### Simple way
+
+You will need to either use the [UCL Virtual Private Network](https://www.ucl.ac.uk/isd/services/get-connected/ucl-virtual-private-network-vpn/) or ssh in to UCL's gateway `tails.ucl.ac.uk` first. From tails you can then ssh in. 
+
+```
+ssh <your_UCL_user_id>@tails.cs.ucl.ac.uk
+ssh <your_UCL_user_id>@<login_node>.cs.ucl.ac.uk
+```
+
+There are a few login nodes availabel but it shouldn't really matter which you use. `gamble` is the one I use. 
+
+#### Rapidos way
+
+You can setup a 
 
 <p align="center">
   <img width="600" src="asciinema/logging_in.svg">
@@ -45,7 +70,7 @@ The IHI is also in the process so procuring its own HPC services but we're not t
 
 ## Scheduler
 
-###qsub
+### qsub
 Submit a job to the scheduler with qsub
 ```bash
 qsub /path/to/submission/script/
