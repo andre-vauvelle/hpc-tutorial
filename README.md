@@ -87,10 +87,10 @@ job-ID  prior   name       user         state submit/start at     queue         
 qstat -j <job-ID>
 ```
 
-### qsub
-Submit a job to the scheduler with qsub
+### qsdel
+Delete a job to the scheduler with qdel
 ```bash
-qsub /path/to/submission/script.sh
+qdel /path/to/submission/script.sh
 ```
 
 ## Serial Job Script Example
