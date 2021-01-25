@@ -62,7 +62,13 @@ There are a few login nodes availabel but it shouldn't really matter which you u
 
 #### Rapidos way
 
-You can setup a 
+You can also set up this in your `~/.ssh/config`
+```
+Host gamble
+	HostName gamble.cs.ucl.ac.uk
+	User vauvelle
+	ProxyJump vauvelle@tails.cs.ucl.ac.uk
+ ```
 
 <p align="center">
   <img width="600" src="asciinema/logging_in.svg">
@@ -73,7 +79,7 @@ You can setup a
 ### qsub
 Submit a job to the scheduler with qsub
 ```bash
-qsub /path/to/submission/script/
+qsub /path/to/submission/script.sh
 ```
 ### qstat
 Get the status of a job with qstat
@@ -85,12 +91,80 @@ job-ID  prior   name       user         state submit/start at     queue         
 qstat -j <job-ID>
 ```
 
-### q
+### qsub
 Submit a job to the scheduler with qsub
 ```bash
-qsub /path/to/submission/script/
+qsub /path/to/submission/script.sh
 ```
 
+## Serial Job Script Example
 
+The most basic type of job a user can submit is a serial job. These jobs run on a single processor (core) with a single thread. 
 
+Shown below is a simple job script that runs /bin/date (which prints the current date) on the compute node, and puts the output into a file.
 
+```bash
+#!/bin/bash -l
+
+# Batch script to run a serial job under SGE.
+
+# Request ten minutes of wallclock time (format hours:minutes:seconds).
+#$ -l h_rt=0:10:0
+
+# Request 1 gigabyte of RAM (must be an integer followed by M, G, or T)
+#$ -l mem=1G
+
+# Request 15 gigabyte of TMPDIR space (default is 10 GB - remove if cluster is diskless)
+#$ -l tmpfs=15G
+
+# Set the name of the job.
+#$ -N Serial_Job
+
+# Set the working directory to somewhere in your scratch space.  
+#  This is a necessary step as compute nodes cannot write to $HOME.
+# Replace "<your_UCL_id>" with your UCL user ID.
+#$ -wd /home/<your_UCL_id>/Scratch/workspace
+
+# Your work should be done in $TMPDIR 
+cd $TMPDIR
+
+# Run the application and put the output into a file called date.txt
+/bin/date > date.txt
+
+# Preferably, tar-up (archive) all output files onto the shared scratch area
+tar -zcvf $HOME/Scratch/files_from_job_$JOB_ID.tar.gz $TMPDIR
+
+# Make sure you have given enough time for the copy to complete!
+```
+
+## Hyperopt
+![Network Diagram](images/network_diagram_hyperopt.png)
+
+My job script
+
+```
+#$ -l tmem=16G
+#$ -l h_rt=9:0:0
+#$ -l gpu=true
+#$ -S /bin/bash
+#$ -j y
+#$ -N gpu_worker50
+#$ -t 1-10
+#$ -tc 4
+
+#$ -o /home/vauvelle/doctor_signature/jobs/logs
+hostname
+date
+PROJECT_DIR='/home/vauvelle/doctor_signature/'
+export PYTHONPATH=$PYTHONPATH:$PROJECT_DIR
+cd $PROJECT_DIR || exit
+source /share/apps/source_files/python/python-3.7.0.source
+source /share/apps/source_files/cuda/cuda-10.1.source
+source .env
+source ./.myenv/bin/activate
+echo "Pulling any jobs with status 0"
+hyperopt-mongo-worker --mongo=bigtop:27017/hyperopt --poll-interval=0.1 --max-consecutive-failures=5
+date
+```
+
+Hyperopt mongo worker: http://hyperopt.github.io/hyperopt/scaleout/mongodb/
