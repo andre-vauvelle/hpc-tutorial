@@ -70,10 +70,6 @@ Host gamble
 	ProxyJump vauvelle@tails.cs.ucl.ac.uk
  ```
 
-<p align="center">
-  <img width="600" src="asciinema/logging_in.svg">
-</p>
-
 ## Scheduler
 
 ### qsub
