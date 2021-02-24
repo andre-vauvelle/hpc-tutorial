@@ -165,3 +165,6 @@ date
 
 
 Hyperopt mongo worker: http://hyperopt.github.io/hyperopt/scaleout/mongodb/
+
+
+Other solutions: https://optuna.org/ (Uses a rdb instead of mongo)
