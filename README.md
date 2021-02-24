@@ -87,7 +87,7 @@ job-ID  prior   name       user         state submit/start at     queue         
 qstat -j <job-ID>
 ```
 
-### qsdel
+### qdel
 Delete a job to the scheduler with qdel
 ```bash
 qdel /path/to/submission/script.sh
