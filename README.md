@@ -3,7 +3,7 @@
 ## Why use the HPC?
 * No CUDA enabled GPU on your laptop
 * Don’t want your laptop to become a radiator
-* Run parallel experiments and get results quicker
+* Run parallel experiments and get results quicker (10-20+ GPUs!)
 * Hyperparameter optimization
 * BIG GPU’s
 * Free service
@@ -30,7 +30,28 @@ If not you can request an account:
 
 This guide is going to use the CS HPC cluster but the two are very similar. Worth noting that I have borrowed loads from the *much better* docs of RC https://www.rc.ucl.ac.uk/docs/.
 
-The IHI is in the process so procuring its own HPC services but we're not there yet :(.
+### Gold Membership (Myriad only)
+~~The IHI is in the process so procuring its own HPC services but we're not there yet :(.~~
+
+Now you can get access to *gold* membership. This gives you priority jobs (skip the queue).
+
+You can see who is a *golden boi* on Myriad with their start and end dates by running.
+```{bash}
+glsalloc -p hpc.22 
+```
+
+Your users can run the `budgets` command to see that they are in the hpc.22 budget, and the amount of Gold it currently has left unused in it in the active allocation.
+
+To submit high priority jobs, they should add this to their jobscripts:
+```{bash}
+#$ -P Gold
+#$ -A hpc.22
+```
+
+They can also pass those on the command line to qsub or qrsh like
+```{bash}
+qsub -P Gold -A hpc.22 myscript.sh
+```
 
 ## How does it work?
 ![Network Diagram](images/network_diagram_basic.png)
@@ -69,6 +90,12 @@ Host gamble
 	User vauvelle
 	ProxyJump vauvelle@tails.cs.ucl.ac.uk
  ```
+
+Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com/academy/ssh/copy-id) for passwordless login.
+ ```
+ ssh-copy-id <user>@<host>
+ ```
+ 
 
 ## Scheduler
 
@@ -170,8 +197,10 @@ Hyperopt mongo worker: http://hyperopt.github.io/hyperopt/scaleout/mongodb/
 Other solutions: https://optuna.org/ (Uses a rdb instead of mongo)
 
 # Helpful stuff
-File count quota on CS HPC is 150k, watchout for venv/conda lib folders can be huge. Find file count quickly with
+- File count quota on CS HPC is 150k, watchout for venv/conda lib folders can be huge. Find file count quickly with
 ```bash
 rsync --stats --dry-run -ax /path/to/folder  /tmp
 ```
+- Watch out for zero indexing with zsh vs bash
+- zsh doesn't play well with hpc scheduler, avoid in jobs scripts and qrsh
 
