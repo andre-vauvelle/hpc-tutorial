@@ -175,5 +175,5 @@ Other solutions: https://optuna.org/ (Uses a rdb instead of mongo)
 rsync --stats --dry-run -ax /path/to/folder  /tmp
 ```
 - Watch out for zero indexing with zsh vs bash
-- zsh doesn't play well with hpc scheduler 
+- zsh doesn't play well with hpc scheduler, avoid in jobs scripts and qrsh
 
