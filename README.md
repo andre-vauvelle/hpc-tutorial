@@ -96,6 +96,9 @@ Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com
  ssh-copy-id <user>@<host>
  ```
  
+## Learn bash!
+(https://learnxinyminutes.com/docs/bash/)[https://learnxinyminutes.com/docs/bash/]
+
 
 ## Scheduler by example!
 
