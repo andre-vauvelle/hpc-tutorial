@@ -97,30 +97,12 @@ Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com
  ```
  
 
-## Scheduler
+## Scheduler by example!
 
-### qsub
-Submit a job to the scheduler with qsub
-```bash
-qsub /path/to/submission/script.sh
-```
-### qstat
-Get the status of a job with qstat
-```bash
-qstat
-job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
------------------------------------------------------------------------------------------------------------------
-6506636 0.00000 testing    jbloggs      qw    21/12/2012 11:11:11                                    1     
-qstat -j <job-ID>
-```
+Now we can access a cluster lets create a job script and sumbmit it to the scheduler!
 
-### qdel
-Delete a job to the scheduler with qdel
-```bash
-qdel /path/to/submission/script.sh
-```
 
-## Serial Job Script Example
+### Serial Job Script Example
 
 The most basic type of job a user can submit is a serial job. These jobs run on a single processor (core) with a single thread. 
 
@@ -158,6 +140,40 @@ cd $TMPDIR
 tar -zcvf $HOME/Scratch/files_from_job_$JOB_ID.tar.gz $TMPDIR
 
 # Make sure you have given enough time for the copy to complete!
+```
+
+### qsub
+Submit a job to the scheduler with qsub
+```bash
+qsub /home/<your_UCL_id>/hpc-tutorial/jobs/date-cpu.sh
+```
+
+### qstat
+Get the status of a job with qstat
+```bash
+qstat
+job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
+-----------------------------------------------------------------------------------------------------------------
+6506636 0.00000 testing    jbloggs      qw    21/12/2012 11:11:11                                    1     
+qstat -j <job-ID>
+```
+
+You can also check out what's going on with the other nodes. Take a look at the [qstat docs](http://gridscheduler.sourceforge.net/htmlman/htmlman1/qstat.html) to see what the flags are doing. Very useful for spying on other users jobs :eyes:.
+```
+qstat -f -ext -l gpu
+```
+
+### qdel
+Delete a job to the scheduler with qdel. Too bad you can only delete your own jobs...
+```bash
+qdel <job-ID>
+```
+### GPU Job
+
+Now we'll run a simple pytorch mnist example this time using a GPU.
+
+```
+	
 ```
 
 ## Hyperopt
