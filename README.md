@@ -170,8 +170,10 @@ Hyperopt mongo worker: http://hyperopt.github.io/hyperopt/scaleout/mongodb/
 Other solutions: https://optuna.org/ (Uses a rdb instead of mongo)
 
 # Helpful stuff
-File count quota on CS HPC is 150k, watchout for venv/conda lib folders can be huge. Find file count quickly with
+- File count quota on CS HPC is 150k, watchout for venv/conda lib folders can be huge. Find file count quickly with
 ```bash
 rsync --stats --dry-run -ax /path/to/folder  /tmp
 ```
+- Watch out for zero indexing with zsh vs bash
+- zsh doesn't play well with hpc scheduler 
 
