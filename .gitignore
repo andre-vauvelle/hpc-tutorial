@@ -2,4 +2,6 @@ data/*
 !data/.gitkeep
 lightning_logs/*
 !lightning_logs/.gitkeep
+jobs/logs/*
+!jobs/logs/.gitkeep
 
