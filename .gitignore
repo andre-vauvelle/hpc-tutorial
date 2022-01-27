@@ -4,5 +4,5 @@ lightning_logs/*
 !lightning_logs/.gitkeep
 jobs/logs/*
 !jobs/logs/.gitkeep
-__pycache__/
+hpc-tutorial/__pycache__/
 
