@@ -1,0 +1,5 @@
+data/*
+!data/.gitkeep
+lightning_logs/*
+!lightning_logs/.gitkeep
+
