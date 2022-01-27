@@ -1,0 +1,9 @@
+name: hpc-example
+dependencies:
+        - pytorch
+        - pytorch-lightning
+        - torchvision
+        - torchmetrics
+        - setuptools==59.5.0
+        - lightning-bolts
+        - jsonargparse
