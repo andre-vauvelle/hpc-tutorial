@@ -30,7 +30,24 @@ If not you can request an account:
 
 This guide is going to use the CS HPC cluster but the two are very similar. Worth noting that I have borrowed loads from the *much better* docs of RC https://www.rc.ucl.ac.uk/docs/.
 
-The IHI is in the process so procuring its own HPC services but we're not there yet :(.
+~~The IHI is in the process so procuring its own HPC services but we're not there yet :(.~~
+Now you can get access to *gold* membership. 
+
+You can see them all on Myriad with their start and end dates by running 
+glsalloc -p hpc.22 
+
+Your users can run the "budgets" command to see that they are in the hpc.22 budget, and the amount of Gold it currently has left unused in it in the active allocation.
+
+To submit high priority jobs, they should add this to their jobscripts:
+```{bash}
+#$ -P Gold
+#$ -A hpc.22
+```
+
+They can also pass those on the command line to qsub or qrsh like
+```{bash}
+qsub -P Gold -A hpc.22 myscript.sh
+```
 
 ## How does it work?
 ![Network Diagram](images/network_diagram_basic.png)
