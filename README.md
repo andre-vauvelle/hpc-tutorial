@@ -3,7 +3,7 @@
 ## Why use the HPC?
 * No CUDA enabled GPU on your laptop
 * Don’t want your laptop to become a radiator
-* Run parallel experiments and get results quicker (10-20 GPUs!)
+* Run parallel experiments and get results quicker (10-20+ GPUs!)
 * Hyperparameter optimization
 * BIG GPU’s
 * Free service
