@@ -1,4 +1,7 @@
 name: hpc-example
+channels: 
+        - defaults
+        - conda-forge
 dependencies:
         - pytorch
         - pytorch-lightning
