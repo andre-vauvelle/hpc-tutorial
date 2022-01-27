@@ -96,31 +96,16 @@ Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com
  ssh-copy-id <user>@<host>
  ```
  
+## Learn bash!
+(https://learnxinyminutes.com/docs/bash/)[https://learnxinyminutes.com/docs/bash/]
 
-## Scheduler
 
-### qsub
-Submit a job to the scheduler with qsub
-```bash
-qsub /path/to/submission/script.sh
-```
-### qstat
-Get the status of a job with qstat
-```bash
-qstat
-job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
------------------------------------------------------------------------------------------------------------------
-6506636 0.00000 testing    jbloggs      qw    21/12/2012 11:11:11                                    1     
-qstat -j <job-ID>
-```
+## Scheduler by example!
 
-### qdel
-Delete a job to the scheduler with qdel
-```bash
-qdel /path/to/submission/script.sh
-```
+Now we can access a cluster lets create a job script and sumbmit it to the scheduler!
 
-## Serial Job Script Example
+
+### Serial Job Script Example
 
 The most basic type of job a user can submit is a serial job. These jobs run on a single processor (core) with a single thread. 
 
@@ -160,10 +145,106 @@ tar -zcvf $HOME/Scratch/files_from_job_$JOB_ID.tar.gz $TMPDIR
 # Make sure you have given enough time for the copy to complete!
 ```
 
+### qsub
+Submit a job to the scheduler with qsub
+```bash
+qsub /home/<your_UCL_id>/hpc-tutorial/jobs/date-cpu.sh
+```
+
+### qstat
+Get the status of a job with qstat
+```bash
+qstat
+job-ID  prior   name       user         state submit/start at     queue                          slots ja-task-ID 
+-----------------------------------------------------------------------------------------------------------------
+6506636 0.00000 testing    jbloggs      qw    21/12/2012 11:11:11                                    1     
+qstat -j <job-ID>
+```
+
+You can also check out what's going on with the other nodes. Take a look at the [qstat docs](http://gridscheduler.sourceforge.net/htmlman/htmlman1/qstat.html) to see what the flags are doing. Very useful for spying on other users jobs :eyes:.
+```
+qstat -f -ext -l gpu
+```
+
+### qdel
+Delete a job to the scheduler with qdel. Too bad you can only delete your own jobs...
+```bash
+qdel <job-ID>
+```
+### GPU Job
+
+Now we'll run a simple pytorch mnist example this time using a GPU. Slightly different when using myriad (https://www.rc.ucl.ac.uk/docs/Example_Jobscripts/#gpu-job-script-example)[https://www.rc.ucl.ac.uk/docs/Example_Jobscripts/#gpu-job-script-example].
+
+```
+##!/bin/bash -l
+#$ -l tmem=16G
+#$ -l h_rt=50:0:0
+# Use this flag for a gpu job
+#$ -l gpu=true
+#$ -S /bin/bash
+#$ -j y
+#$ -N 
+# Useful to redirect logs
+#$ -o /home/<ucl-id>/hpc-tutorial/jobs/logs
+
+hostname
+date
+SOURCE_DIR='/home/<ucl-id>/hpc-tutorial'
+export PYTHONPATH=$PYTHONPATH:$SOURCE_DIR
+cd $SOURCE_DIR || exit
+source /share/apps/source_files/cuda/cuda-10.1.source
+conda activate hpc-example
+
+python pl_examples/image_classifier_4_lightning_module.py
+date
+```
+
+### Simple grid search
+
+Best part about using the cluster is the number of GPUs. This next one is an example of how to define a simple grid search using a config file and an array job.
+
+
+```
+##!/bin/bash -l
+#$ -l tmem=16G
+#$ -l h_rt=50:0:0
+# Use this flag for a gpu job
+#$ -l gpu=true
+#$ -S /bin/bash
+#$ -j y
+#$ -N 
+# Useful to redirect logs
+#$ -o /home/<ucl-id>/hpc-tutorial/jobs/logs
+# Defines array of jobs
+#$ -t 1:4
+# Max number of jobs running at once
+#$ -tc 4
+
+hostname
+date
+SOURCE_DIR='/home/<ucl-id>/hpc-tutorial'
+export PYTHONPATH=$PYTHONPATH:$SOURCE_DIR
+cd $SOURCE_DIR || exit
+source /share/apps/source_files/cuda/cuda-10.1.source
+conda activate hpc-example
+
+
+CONFIG_PATH='jobs/configs/lr-grid.csv'
+
+ROW=$SGE_TASK_ID
+LINE=$(sed -n $((ROW + 1))'{p;q}' "$CONFIG_PATH")
+ARGS=($(echo "$LINE"))
+
+LR=${ARGS[0]}
+
+python pl_examples/image_classifier_4_lightning_module.py -model.lr $LR
+date
+```
+
 ## Hyperopt
 ![Network Diagram](images/network_diagram_hyperopt.png)
 
-My job script
+Possible to do more complicate stuff too... Here using mongodb and hyperopt to pull new hyperparameters from a database.
 
 ```
 #$ -l tmem=16G
