@@ -30,13 +30,17 @@ If not you can request an account:
 
 This guide is going to use the CS HPC cluster but the two are very similar. Worth noting that I have borrowed loads from the *much better* docs of RC https://www.rc.ucl.ac.uk/docs/.
 
+### Gold Membership (Myriad only)
 ~~The IHI is in the process so procuring its own HPC services but we're not there yet :(.~~
-Now you can get access to *gold* membership. 
 
-You can see them all on Myriad with their start and end dates by running 
+Now you can get access to *gold* membership. This gives you priority jobs (skip the queue).
+
+You can see who is a *golden boi* on Myriad with their start and end dates by running.
+```{bash}
 glsalloc -p hpc.22 
+```
 
-Your users can run the "budgets" command to see that they are in the hpc.22 budget, and the amount of Gold it currently has left unused in it in the active allocation.
+Your users can run the `budgets` command to see that they are in the hpc.22 budget, and the amount of Gold it currently has left unused in it in the active allocation.
 
 To submit high priority jobs, they should add this to their jobscripts:
 ```{bash}
@@ -86,6 +90,12 @@ Host gamble
 	User vauvelle
 	ProxyJump vauvelle@tails.cs.ucl.ac.uk
  ```
+
+Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com/academy/ssh/copy-id) for passwordless login.
+ ```
+ ssh-copy-id <user>@<host>
+ ```
+ 
 
 ## Scheduler
 
