@@ -97,8 +97,7 @@ Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com
  ```
  
 ## Learn bash!
-(https://learnxinyminutes.com/docs/bash/)[https://learnxinyminutes.com/docs/bash/]
-
+https://learnxinyminutes.com/docs/bash/
 
 ## Scheduler by example!
 
@@ -173,7 +172,7 @@ qdel <job-ID>
 ```
 ### GPU Job
 
-Now we'll run a simple pytorch mnist example this time using a GPU. Slightly different when using myriad (https://www.rc.ucl.ac.uk/docs/Example_Jobscripts/#gpu-job-script-example)[https://www.rc.ucl.ac.uk/docs/Example_Jobscripts/#gpu-job-script-example].
+Now we'll run a simple pytorch mnist example this time using a GPU. Slightly different when using myriad https://www.rc.ucl.ac.uk/docs/Example_Jobscripts/#gpu-job-script-example.
 
 ```
 ##!/bin/bash -l
