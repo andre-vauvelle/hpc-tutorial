@@ -98,6 +98,7 @@ Also can be useful but potentially riske to share [SSH keys](https://www.ssh.com
  
 ## Learn bash!
 https://learnxinyminutes.com/docs/bash/
+and this https://missing.csail.mit.edu/
 
 ## Scheduler by example!
 
