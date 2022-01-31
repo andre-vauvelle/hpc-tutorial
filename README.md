@@ -1,6 +1,6 @@
 # High Performance Cluster (HPC) short tutorial for UCL AI-Enabled Healthcare CDT
 
-Teams channel: https://teams.microsoft.com/l/channel/19%3adf65b7c35c96490789f35dd2b29d4152%40thread.tacv2/HPC%2520Help%2520Center%2520%25F0%259F%25A6%25BE?groupId=dff05941-85f1-4b93-a0e1-68f19ab385b9&tenantId=1faf88fe-a998-4c5b-93c9-210a11d9a5c2
+[Teams channel](https://teams.microsoft.com/l/channel/19%3adf65b7c35c96490789f35dd2b29d4152%40thread.tacv2/HPC%2520Help%2520Center%2520%25F0%259F%25A6%25BE?groupId=dff05941-85f1-4b93-a0e1-68f19ab385b9&tenantId=1faf88fe-a998-4c5b-93c9-210a11d9a5c2)
 
 
 ## Why use the HPC?
